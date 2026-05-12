@@ -3,7 +3,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/api/index.js"
     },
     {
       "src": "/admin",
@@ -35,7 +35,7 @@
     }
   ],
   "functions": {
-    "api/**/*.js": {
+    "api/index.js": {
       "maxDuration": 30
     }
   },
