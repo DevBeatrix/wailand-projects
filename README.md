@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Wailand Team — Support & Ticket System
 
 Premium ticket and support SaaS platform built with **Express**, **Socket.io**, and **JSON file storage**.
@@ -204,3 +205,6 @@ firebase deploy
     <script src="/js/client.js"></script>
   </body>
 </html>
+=======
+# wailand-projects
+>>>>>>> b6f9d4a7c1a59361795a6ec2f8dd8619f8693a09
