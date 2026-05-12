@@ -42,7 +42,7 @@ async function listTickets(req, res) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method === 'POST') {
     return withMiddleware(createTicket, sessionMiddleware, strictLimiter)(req, res);
   } else if (req.method === 'GET') {

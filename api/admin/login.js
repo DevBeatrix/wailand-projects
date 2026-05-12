@@ -22,4 +22,4 @@ async function handler(req, res) {
   }
 }
 
-export default withMiddleware(handler, sessionMiddleware, loginLimiter);
+module.exports = withMiddleware(handler, sessionMiddleware, loginLimiter);

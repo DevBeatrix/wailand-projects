@@ -7,4 +7,4 @@ async function handler(req, res) {
   req.session.destroy(() => res.json({ ok: true }));
 }
 
-export default withMiddleware(handler, sessionMiddleware);
+module.exports = withMiddleware(handler, sessionMiddleware);

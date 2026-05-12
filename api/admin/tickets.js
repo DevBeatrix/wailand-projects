@@ -24,4 +24,4 @@ async function handler(req, res) {
   }
 }
 
-export default withMiddleware(handler, sessionMiddleware, requireAdmin);
+module.exports = withMiddleware(handler, sessionMiddleware, requireAdmin);

@@ -172,7 +172,7 @@ async function requestClose(req, res) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { id, ...rest } = req.query;
   req.query.id = id;
 

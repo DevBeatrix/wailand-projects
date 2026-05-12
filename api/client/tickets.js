@@ -17,4 +17,4 @@ async function handler(req, res) {
   }
 }
 
-export default withMiddleware(handler, sessionMiddleware);
+module.exports = withMiddleware(handler, sessionMiddleware);

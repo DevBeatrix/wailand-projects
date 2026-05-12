@@ -9,7 +9,7 @@ const { sessionMiddleware } = require('./_lib/middleware');
 // Socket.io room management (simplified for serverless)
 const activeConnections = new Map();
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
