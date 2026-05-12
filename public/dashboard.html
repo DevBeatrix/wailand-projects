@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wailand Team — Ticket</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body data-page="dashboard">
+    <div class="dash">
+      <aside class="dash-side">
+        <a href="/" class="brand" style="margin-bottom: 1rem; display: inline-flex">
+          <span class="brand-mark" data-logo-text>W</span>
+          <span data-site-name>Wailand Team</span>
+        </a>
+        <div class="muted" style="margin: 0.5rem 0">Active</div>
+        <div id="listActive"></div>
+        <div class="muted" style="margin: 1rem 0 0.5rem">Closed</div>
+        <div id="listClosed"></div>
+        <a class="btn btn-ghost btn-sm" style="margin-top: 1rem; width: 100%" href="/">New ticket</a>
+      </aside>
+      <section class="dash-main">
+        <header class="dash-top">
+          <div>
+            <div id="ticketTitle" style="font-weight: 700; font-size: 1.1rem">Ticket</div>
+            <div class="ticket-meta" style="margin-top: 0.35rem">
+              <span class="pill" id="ticketType">—</span>
+              <span class="pill pill-live" id="ticketStatus">—</span>
+            </div>
+          </div>
+          <div class="dropdown" id="ticketMenu">
+            <button type="button" class="btn btn-ghost btn-sm" id="menuBtn">⋯</button>
+            <div class="dropdown-panel">
+              <div class="card card-pad" style="border: none; box-shadow: none; background: transparent">
+                <div class="muted" style="margin-bottom: 0.5rem">Ticket information</div>
+                <div id="infoPanel" class="grid2" style="gap: 0.35rem 1rem"></div>
+              </div>
+              <button type="button" class="menu-item" id="closeReqBtn">Request to close ticket</button>
+            </div>
+          </div>
+        </header>
+        <div class="typing" id="typingInd"></div>
+        <div class="chat" id="chatMessages"></div>
+        <div class="chat-input">
+          <div class="chat-tools">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('fileInput').click()">
+              Upload
+            </button>
+            <input type="file" id="fileInput" hidden />
+            <button type="button" class="btn btn-ghost btn-sm" id="audioBtn">Audio</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="codeBtn">Code</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="payBtn">Payment</button>
+          </div>
+          <div class="chat-row">
+            <textarea class="input" id="msgInput" rows="2" placeholder="Message…"></textarea>
+            <button type="button" class="btn btn-primary" id="sendBtn">Send</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="payModal">
+      <div class="modal card card-pad">
+        <div class="modal-head">
+          <h2 class="modal-title">Record payment</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="closePay">Close</button>
+        </div>
+        <form id="payForm">
+          <label>Method</label>
+          <select class="input" name="method" id="payMethod" required></select>
+          <div style="margin-top: 0.75rem">
+            <label>Amount</label>
+            <input class="input" type="number" step="0.01" name="amount" required />
+          </div>
+          <div style="margin-top: 0.75rem">
+            <label>Coupon</label>
+            <input class="input" name="coupon" placeholder="Optional" />
+          </div>
+          <div style="margin-top: 1rem; display: flex; justify-content: flex-end; gap: 0.5rem">
+            <button type="button" class="btn btn-ghost" id="closePay2">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('closePay2').addEventListener('click', () => {
+        document.getElementById('payModal').classList.remove('open');
+      });
+    </script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/client.js"></script>
+    <script>
+      document.getElementById('codeBtn').addEventListener('click', async () => {
+        const lang = prompt('Language / label', 'plaintext');
+        if (lang === null) return;
+        const body = prompt('Code');
+        if (body === null) return;
+        const params = new URLSearchParams(location.search);
+        const ticketId = params.get('id');
+        const token = params.get('token');
+        const fd = new FormData();
+        fd.set('body', body);
+        fd.set('msg_type', 'code');
+        fd.set('lang', lang);
+        fd.set('token', token);
+        await fetch('/api/tickets/' + ticketId + '/messages', { method: 'POST', body: fd, credentials: 'include' });
+      });
+    </script>
+  </body>
+</html>

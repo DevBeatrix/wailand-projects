@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wailand Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body data-page="home">
+    <header class="nav">
+      <div class="shell nav-inner">
+        <a href="/" class="brand">
+          <span class="brand-mark" data-logo-text>W</span>
+          <span data-site-name>Wailand Team</span>
+        </a>
+        <nav class="nav-links">
+          <a class="btn btn-ghost btn-sm" href="/dashboard.html">My tickets</a>
+          <a class="btn btn-ghost btn-sm" href="/admin.html">Admin</a>
+          <a class="btn btn-ghost btn-sm" href="/owner.html">Owner</a>
+          <button type="button" class="btn btn-primary btn-sm" id="openTicketModal">Create ticket</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell hero">
+      <div class="hero-grid">
+        <div>
+          <p class="pill pill-live" style="width: fit-content; margin-bottom: 1rem">Realtime · Secure · Premium</p>
+          <h1 class="h1">Support that feels <span style="color: var(--accent)">instant</span>.</h1>
+          <p class="lead">
+            Glass dashboards, live chat, rich media, and intelligent routing — engineered for teams who expect a
+            flagship experience.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem">
+            <button type="button" class="btn btn-primary" id="openTicketModal2">Start a ticket</button>
+            <a class="btn btn-ghost" href="/dashboard.html">View dashboard</a>
+          </div>
+        </div>
+        <div class="card glow hero-visual" aria-hidden="true">
+          <div class="hero-visual-inner">
+            <div class="fake-row" style="width: 70%"></div>
+            <div class="fake-row" style="width: 45%"></div>
+            <div class="fake-row" style="width: 88%"></div>
+            <div class="fake-row" style="width: 60%"></div>
+            <div style="margin-top: 1rem" class="card card-pad">
+              <div class="muted" style="font-size: 0.8rem">Live queue</div>
+              <div style="font-size: 1.5rem; font-weight: 700; margin-top: 0.35rem">Fluid motion</div>
+              <div class="muted" style="margin-top: 0.35rem">Agents see claims, recalls, and typing in real time.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer shell">
+      <div>© <span data-site-name>Wailand Team</span> — crafted for modern operations teams.</div>
+    </footer>
+
+    <div class="modal-backdrop" id="ticketModal" aria-hidden="true">
+      <div class="modal card card-pad">
+        <div class="modal-head">
+          <h2 class="modal-title">Create ticket</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="closeTicketModal">Close</button>
+        </div>
+        <form id="ticketForm">
+          <label>Ticket type</label>
+          <select class="input" name="type" required>
+            <option value="order">Order ticket</option>
+            <option value="support">Support ticket</option>
+          </select>
+          <div class="grid2" style="margin-top: 0.85rem">
+            <div>
+              <label>Title</label>
+              <input class="input" name="title" required placeholder="Short summary" />
+            </div>
+            <div>
+              <label>Priority</label>
+              <select class="input" name="priority" required>
+                <option value="low">Low</option>
+                <option value="normal" selected>Normal</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid2" style="margin-top: 0.85rem">
+            <div>
+              <label>Email</label>
+              <input class="input" type="email" name="email" required />
+            </div>
+            <div>
+              <label>Phone</label>
+              <input class="input" type="tel" name="phone" placeholder="Optional" />
+            </div>
+          </div>
+          <div style="margin-top: 0.85rem">
+            <label>Description</label>
+            <textarea class="input" name="description" placeholder="What do you need?"></textarea>
+          </div>
+          <div style="margin-top: 1rem; display: flex; justify-content: flex-end; gap: 0.5rem">
+            <button type="button" class="btn btn-ghost" id="closeTicketModal2">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('openTicketModal2').addEventListener('click', () => {
+        document.getElementById('ticketModal').classList.add('open');
+      });
+      document.getElementById('closeTicketModal2').addEventListener('click', () => {
+        document.getElementById('ticketModal').classList.remove('open');
+      });
+    </script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/client.js"></script>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wailand Team — Owner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/app.css" />
+    <style>
+      #ownerApp {
+        display: none;
+      }
+      .tabs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .tab {
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid var(--stroke);
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        font: inherit;
+      }
+      .tab.active {
+        background: rgba(99, 102, 241, 0.22);
+        border-color: rgba(99, 102, 241, 0.4);
+      }
+      .panel {
+        display: none;
+      }
+      .panel.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ownerLogin" class="auth-wrap">
+      <div class="auth-card card card-pad glow">
+        <div class="brand" style="margin-bottom: 1rem">
+          <span class="brand-mark" data-logo-text>W</span>
+          <span data-site-name>Wailand Team</span>
+        </div>
+        <h1 style="margin: 0 0 0.5rem; font-size: 1.35rem">Owner console</h1>
+        <form id="ownerLoginForm">
+          <label>Email</label>
+          <input class="input" type="email" name="email" required />
+          <div style="margin-top: 0.75rem">
+            <label>Password</label>
+            <input class="input" type="password" name="password" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem">Enter</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="ownerApp" class="shell" style="padding: 1.25rem; max-width: 1400px">
+      <header style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap">
+        <div class="brand">
+          <span class="brand-mark" data-logo-text>W</span>
+          <span data-site-name>Wailand Team</span>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" id="ownerLogout">Log out</button>
+      </header>
+
+      <div class="tabs" style="margin-top: 1.25rem">
+        <button type="button" class="tab active" data-tab="analytics">Analytics</button>
+        <button type="button" class="tab" data-tab="admins">Admins</button>
+        <button type="button" class="tab" data-tab="tickets">All tickets</button>
+        <button type="button" class="tab" data-tab="logs">System logs</button>
+        <button type="button" class="tab" data-tab="settings">Global settings</button>
+      </div>
+
+      <section class="panel active" data-panel="analytics">
+        <div class="stat-grid" id="statGrid"></div>
+        <div class="card card-pad">
+          <h3 style="margin-top: 0">Admin points</h3>
+          <div class="table-wrap">
+            <table id="pointsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="admins">
+        <div class="grid2" style="max-width: 720px; margin-bottom: 1rem">
+          <form id="addAdminForm" class="card card-pad" style="grid-column: 1 / -1">
+            <h3 style="margin-top: 0">Add admin</h3>
+            <div class="grid2">
+              <div>
+                <label>Name</label>
+                <input class="input" name="name" required />
+              </div>
+              <div>
+                <label>Email</label>
+                <input class="input" name="email" type="email" required />
+              </div>
+            </div>
+            <div style="margin-top: 0.75rem">
+              <label>Password</label>
+              <input class="input" name="password" type="password" required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 1rem">Create</button>
+          </form>
+          <form id="banForm" class="card card-pad" style="grid-column: 1 / -1">
+            <h3 style="margin-top: 0">Ban / unban user by email</h3>
+            <label>Email</label>
+            <input class="input" name="email" required />
+            <label style="margin-top: 0.75rem">Banned</label>
+            <select class="input" name="banned">
+              <option value="true">Banned</option>
+              <option value="false">Active</option>
+            </select>
+            <button type="submit" class="btn btn-danger" style="margin-top: 1rem">Apply</button>
+          </form>
+        </div>
+        <div class="card card-pad">
+          <h3 style="margin-top: 0">Directory</h3>
+          <div class="table-wrap">
+            <table id="adminsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Points</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="tickets">
+        <div class="card card-pad">
+          <div class="table-wrap">
+            <table id="allTicketsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Agent</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="logs">
+        <div class="card card-pad">
+          <div class="table-wrap">
+            <table id="logsTable">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Level</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="settings">
+        <form id="settingsForm" class="card card-pad" style="max-width: 560px">
+          <h3 style="margin-top: 0">Branding & commerce</h3>
+          <label>Website name</label>
+          <input class="input" name="websiteName" />
+          <label style="margin-top: 0.75rem">Logo text</label>
+          <input class="input" name="logoText" />
+          <div class="grid2" style="margin-top: 0.75rem">
+            <div>
+              <label>Main color</label>
+              <input class="input" name="mainColor" type="color" style="height: 42px" />
+            </div>
+            <div>
+              <label>Secondary</label>
+              <input class="input" name="secondaryColor" type="color" style="height: 42px" />
+            </div>
+          </div>
+          <div class="grid2" style="margin-top: 0.75rem">
+            <div>
+              <label>Currency code</label>
+              <input class="input" name="currencyCode" />
+            </div>
+            <div>
+              <label>Symbol</label>
+              <input class="input" name="currencySymbol" />
+            </div>
+          </div>
+          <label style="margin-top: 0.75rem">Payment methods (comma separated)</label>
+          <input class="input" name="paymentMethodsRaw" placeholder="Card, PayPal" />
+          <label style="margin-top: 0.75rem">Upload limit (MB)</label>
+          <input class="input" name="uploadLimitMb" type="number" />
+          <button type="submit" class="btn btn-primary" style="margin-top: 1rem">Save</button>
+        </form>
+      </section>
+    </div>
+
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/owner.js"></script>
+  </body>
+</html>
